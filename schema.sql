@@ -43,11 +43,9 @@ CREATE TABLE Borrowed (
 
 CREATE TABLE DeletedReasons (
                                 bookId INT NOT NULL,
-                                memberId INT NOT NULL,
                                 reason VARCHAR(50),
-                                PRIMARY KEY (bookId, memberId),
-                                FOREIGN KEY (bookId) REFERENCES  Book(id),
-                                FOREIGN KEY (memberId) REFERENCES Member(id)
+                                PRIMARY KEY (bookId),
+                                FOREIGN KEY (bookId) REFERENCES  Book(id)
 );
 
 
