@@ -22,12 +22,12 @@ with open("testdata.sql", "a") as f:
         status = random.choice(statuses)
         condition = random.choice(conditions)
         f.write("insert into book (isbn, status, condition) values (" 
-                + isbn + ", '" + status + "', " + condition + "');\n")
+                + isbn + ", '" + status + "', '" + condition + "');\n")
 
         if status == "deleted":
             reason = random.choice(allWords) + random.choice(allWords) + random.choice(allWords)
             f.write("insert into deleted_reasons (isbn, book_id, reason) values (" 
-                + isbn + ", '" + i + "', " + reason + "');\n") 
+                + isbn + ", '" + i + "', '" + reason + "');\n")
 
     for i in range(1000):
         name = random.choice(allWords)
