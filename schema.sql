@@ -16,7 +16,7 @@ CREATE TABLE 'Book' (
     'isbn' VARCHAR(13) NOT NULL,
     'status' ENUM('available', 'borrowed', 'deleted') NOT NULL,
     'condition' ENUM('new', 'used', 'bad') NOT NULL,
-    PRIMARY KEY ('id')
+    PRIMARY KEY ('id'),
     FOREIGN KEY ('isbn') REFERENCES  BookInfo('isbn')
     );
 
@@ -26,6 +26,27 @@ CREATE TABLE 'Member' (
     'name' varchar(50) NOT NULL,
     'surname' varchar(50) NOT NULL,
     PRIMARY KEY ('id')
+    );
+
+DELETE TABLE 'Borrowed'
+CREATE TABLE 'Borrowed' (
+    'bookId' int(11) NOT NULL,
+    'memberId' int(11) NOT NULL,
+    'dueDate' DATE NOT NULL,
+    'returned' BOOLEAN NOT NULL,
+    PRIMARY KEY ('bookId', 'memberId'),
+    FOREIGN KEY ('bookId') REFERENCES  Book('id'),
+    FOREIGN KEY ('isbn') REFERENCES  BookInfo('isbn')
+    );
+
+DELETE TABLE 'Borrowed'
+CREATE TABLE 'Borrowed' (
+    'bookId' int(11) NOT NULL,
+    'memberId' int(11) NOT NULL,
+    'reason' VARCHAR(50),
+    PRIMARY KEY ('bookId', 'memberId'),
+    FOREIGN KEY ('bookId') REFERENCES  Book('id'),
+    FOREIGN KEY ('isbn') REFERENCES  BookInfo('isbn')
     );
 
 
