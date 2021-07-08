@@ -8,7 +8,7 @@ DROP TABLE Book;
 DROP TABLE BookInfo;
 
 CREATE TABLE BookInfo (
-                          isbn VARCHAR(13) NOT NULL,
+                          isbn VARCHAR(17) NOT NULL,
                           title varchar(50) NOT NULL,
                           authorName varchar(50) NOT NULL,
                           authorSurname varchar(50) NOT NULL,
