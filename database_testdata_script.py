@@ -9,12 +9,12 @@ with open("testdata.sql", "a") as f:
     isbns = []
 
     for i in range(100):
-        isbn = "".join(str(random.randint) for i in range(13))
+        isbn = "".join(str(random.randint(0, 9)) for i in range(13))
         title = random.choice(allWords) + random.choice(allWords) + random.choice(allWords)
         authour_name = random.choice(allWords)
         authour_surname = random.choice(allWords)
-        f.write("insert into book_info (isbn, title, authour_name, authour_surname) values (" 
-                + isbn + ", '" + title + "', " + authour_name + ", '" + authour_surname + "');\n")
+        f.write("insert into bookinfo (isbn, title, authourname, authoursurname) values ("
+                + isbn + ", '" + title + "', '" + authour_name + "', '" + authour_surname + "');\n")
         isbns.append(isbn)
 
     for i in range(1000):
@@ -26,14 +26,14 @@ with open("testdata.sql", "a") as f:
 
         if status == "deleted":
             reason = random.choice(allWords) + random.choice(allWords) + random.choice(allWords)
-            f.write("insert into deleted_reasons (isbn, book_id, reason) values (" 
-                + isbn + ", '" + i + "', '" + reason + "');\n")
+            f.write("insert into deletedreasons (isbn, bookid, reason) values ("
+                + isbn + ", '" + str(i) + "', '" + reason + "');\n")
 
     for i in range(1000):
         name = random.choice(allWords)
         surname = random.choice(allWords)
-        f.write("insert into member (name, surname) values (" 
-                + name + ", '" + surname + "');\n")
+        f.write("insert into member (name, surname) values ('"
+                + name + "', '" + surname + "');\n")
 
 
     # for i in range(100):
