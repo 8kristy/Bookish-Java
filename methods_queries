@@ -1,16 +1,43 @@
 showAllBooksSortedByTitle()
+SELECT * FROM bookinfo ORDER BY title ASC;
+
 showAllBooksSortedByAuthorName()
+SELECT * FROM bookinfo ORDER BY authorName ASC;
+
 showAllBooksSortedByAuthorSurname()
-searchBookByTitle(String title)
+SELECT * FROM bookinfo ORDER BY authorSurname ASC;
+
+searchBookByTitle(String bookTitle)
+SELECT * FROM bookinfo WHERE title LIKE '%bookTitle%';
+
 searchBookByAuthorName(String name)
+SELECT * FROM bookinfo WHERE authorName LIKE '%name%';
+
 searchBookByAuthorSurname(String surname)
-searchBookByISBN(String isbn)
-addNewBook(String isbn, String title, String authorName, String authorSurname)
-editBookTitle(String isbn, String title)
-editBookAuthorName(String isbn, String name)
-editBookAuthorName(String isbn, String surname)
-addBookCopy(int id)
-deleteBookCopy(int id, String reason)
+SELECT * FROM bookinfo WHERE authorSurname LIKE '%surname%';
+
+searchBookByISBN(String bookIsbn)
+SELECT * FROM bookinfo WHERE isbn = bookIsbn;
+
+addNewBook(String bookIsbn, String bookTitle, String bookAuthorName, String bookAuthorSurname)
+INSERT INTO bookinfo (isbn, title, authorName, author) VALUES (bookIsbn, bookTitle, bookAuthorName, bookAuthorSurname)
+
+editBookTitle(String bookIsbn, String bookTitle)
+UPDATE bookinfo SET title = bookTitle WHERE isbn = bookIsbn;
+
+editBookAuthorName(String bookIsbn, String name)
+UPDATE bookinfo SET authorName = name WHERE isbn = bookIsbn;
+
+editBookAuthorSurname(String bookIsbn, String surname)
+UPDATE bookinfo SET authorSurname = surname WHERE isbn = bookIsbn;
+
+addBookCopy(String bookIsbn)
+INSERT INTO book (isbn, bookStatus, bookCondition) VALUES (bookIsbn, 'available', 'new');
+
+deleteBookCopy(int id, String deletionReason)
+UPDATE book SET bookStatus = 'deleted' WHERE id = bookId;
+INSERT INTO DeletedReasons (bookId, reason) VALUES (id, deletionReason);
+
 getTotalBooks(String isbn)
 getAvailableBooks(String isbn)
 showAllBorrowersOfBook(String isbn)
