@@ -52,6 +52,8 @@ public class Main {
         String sql = "select * from bookinfo order by title asc";
 
         Handle handle = jdbi.open();
+        handle.select(sql).mapToMap().list().forEach(System.out::println);
+
 //        Query query = handle.createQuery(sql); // TODO: Replace with mapping to list of books and do extraction/printing that way
 //        for (Map map : query.mapToMap()) {
 //            int id = (int) map.get("id");
