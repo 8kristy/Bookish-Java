@@ -107,14 +107,14 @@ WHERE id = inputBookId;
 INSERT INTO borrowed (bookId, memberId, dueDate, returned)
 VALUES (inputBookId, userId, DATE_ADD(now(),INTERVAL 2 WEEK), false);
 
-checkInBook(int inputBookId, member inpuMemberId)
+checkInBook(int inputBookId, member inputMemberId)
 UPDATE book
 SET bookStatus = 'available'
 WHERE id = inputBookId;
 
 UPDATE borrowed
 SET returned = true
-WHERE memberId = inpuMemberId
+WHERE memberId = inputMemberId
 AND bookId = inputBookId;
 
 showCheckedOutBooks()
