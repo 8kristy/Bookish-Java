@@ -20,7 +20,7 @@ searchBookByISBN(String bookIsbn)
 SELECT * FROM bookinfo WHERE isbn = bookIsbn;
 
 addNewBook(String bookIsbn, String bookTitle, String bookAuthorName, String bookAuthorSurname)
-INSERT INTO bookinfo (isbn, title, authorName, author) VALUES (bookIsbn, bookTitle, bookAuthorName, bookAuthorSurname)
+INSERT INTO bookinfo (isbn, title, authorName, authorSurname) VALUES (bookIsbn, bookTitle, bookAuthorName, bookAuthorSurname)
 
 editBookTitle(String bookIsbn, String bookTitle)
 UPDATE bookinfo SET title = bookTitle WHERE isbn = bookIsbn;
@@ -51,4 +51,9 @@ editMemberSurname(int id, String name)
 checkOutBook(int bookId, userId)
 checkInBook(int id)
 showCheckedOutBooks()
-
+SELECT BookInfo.title, BookInfo.authorName, BookInfo.authorSurname, Member.name, Borrowed.dueDate
+    FROM Borrowed AS br
+    LEFT JOIN Book AS b ON br.bookId=b.id
+    LEFT JOIN BookInfo AS bi ON b.isbn=b.isbn
+    LEFT JOIN Member AS m on b.m
+    WHERE br.returned=false
