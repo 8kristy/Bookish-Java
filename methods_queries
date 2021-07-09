@@ -11,17 +11,86 @@ editBookAuthorName(String isbn, String name)
 editBookAuthorName(String isbn, String surname)
 addBookCopy(int id)
 deleteBookCopy(int id, String reason)
-getTotalBooks(String isbn)
-getAvailableBooks(String isbn)
-showAllBorrowersOfBook(String isbn)
+
+
+countTotalBooksByIsbn(String bookIsbn)
+SELECT COUNT(isbn) total
+FROM bookInfo
+NATURAL JOIN book
+WHERE book.isbn = bookIsbn
+GROUP BY isbn;
+
+countAvailableBooksByIsbn(String bookIsbn)
+SELECT COUNT(isbn) total
+FROM bookInfo
+NATURAL JOIN book
+WHERE book.isbn = bookIsbn
+AND book.bookStatus = 'available'
+GROUP BY isbn;
+
+getAllBorrowersOfBook(String bookIsbn)
+SELECT name, surname, duedate
+FROM bookInfo
+NATURAL JOIN book
+JOIN borrowed
+ON book.id = borrowed.bookid
+JOIN member
+ON borrowed.memberid = member.id
+WHERE book.isbn = bookIsbns
+AND bookStatus = 'borrowed';
+
 showAllMembers()
-showAllBooksByMember(int id)
-addMember(String name, String surname)
-findMemberByFirstName(String name)
-findMemberBySurname(String name)
-editMemberFirstName(int id, String name)
-editMemberSurname(int id, String name)
-checkOutBook(int bookId, userId)
-checkInBook(int id)
+SELECT * FROM member;
+
+showAllBooksByMember(int inputMemberId)
+SELECT bookid, title, CONCAT(authorname," ", authorsurname) author
+FROM member m
+JOIN borrowed b
+ON m.id = b.memberid
+JOIN book
+ON book.id = b.bookid
+NATURAL JOIN bookinfo
+WHERE m.id = inputMemberId;
+
+addMember(String inputName, String inputSurname)
+INSERT INTO member (name, surname)
+VALUES (inputName, inputSurname);
+
+findMemberByFirstName(String inputName)
+SELECT * FROM member
+WHERE name = inputName;
+
+findMemberBySurname(String inputSurname)
+SELECT * FROM member
+WHERE surname = inputSurname;
+
+editMemberFirstName(int inputId, String inputName)
+UPDATE member
+SET name = inputName
+WHERE id = inputId;
+
+editMemberSurname(int inputId, String inputSurname)
+UPDATE member
+SET surname = inputSurname
+WHERE id = inputId;
+
+checkOutBook(int inputBookId, userId)
+UPDATE book
+SET bookStatus = 'borrowed'
+WHERE id = inputBookId;
+
+INSERT INTO borrowed (bookId, memberId, dueDate, returned)
+VALUES (inputBookId, userId, DATE_ADD(now(),INTERVAL 2 WEEK), false);
+
+checkInBook(int inputBookId, member inpuMemberId)
+UPDATE book
+SET bookStatus = 'available'
+WHERE id = inputBookId;
+
+UPDATE borrowed
+SET returned = true
+WHERE memberId = inpuMemberId
+AND bookId = inputBookId;
+
 showCheckedOutBooks()
 
