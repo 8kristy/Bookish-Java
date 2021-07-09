@@ -9,7 +9,8 @@ def add_borrowed(borrowed, i):
     year = random.randint(2015, 2021)
     month = random.randint(1, 12)
     day = random.randint(1, 28)
-    f.write("insert into borrowed (bookid, memberid, dueDate, returned) values ({}, {}, '{}-{}-{}', {});\n".format(str(i), str(memberid), str(year), str(month), str(day), borrowed))
+    f.write("insert into borrowed (bookid, memberid, dueDate, returned) values ({}, {}, '{}-{}-{}', {});\n"
+            .format(str(i), str(memberid), str(year), str(month), str(day), borrowed))
 
 with open("testdata.sql", "a") as f:
     statuses = ["available", "borrowed", "deleted"]

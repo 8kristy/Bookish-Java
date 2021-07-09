@@ -1,11 +1,11 @@
 DROP SCHEMA Bookish;
 CREATE SCHEMA Bookish;
 
-DROP TABLE DeletedReasons;
-DROP TABLE Borrowed;
-DROP TABLE Member;
-DROP TABLE Book;
-DROP TABLE BookInfo;
+DROP TABLE IF EXISTS DeletedReasons;
+DROP TABLE IF EXISTS Borrowed;
+DROP TABLE IF EXISTS Member;
+DROP TABLE IFAdde EXISTS Book;
+DROP TABLE IF EXISTS BookInfo;
 
 CREATE TABLE BookInfo (
                           isbn VARCHAR(17) NOT NULL,
